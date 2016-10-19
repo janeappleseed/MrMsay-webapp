@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MrMsay</title>
+  <style type="text/css">
+    body {
+      font-family: Courier, "Courier New", monospace;
+      font-size: 13px;
+    }
+
+    #wrap {
+      margin: 50px auto 0 auto;
+      width: 800px;
+    }
+
+    #app-info {
+      float: left;
+      width: 220px;
+    }
+
+    #wisdom {
+      float: right;
+      width: 580px;
+    }
+
+    #title {
+      font-size: 200%;
+      margin: 10px 0;
+    }
+
+    #intro {
+      margin: 10px 0 15px 0;
+    }
+
+    #say {
+      margin: 10px 0;
+    }
+
+    #say button {
+      font-family: Courier, "Courier New", monospace;
+      font-size: 13px;
+    }
+
+    #wisdom-body {
+      margin: 0 0 5px 0;
+    }
+
+    #wisdom-shortlink {
+      color: #000;
+      text-decoration: underline;
+    }
+
+    div.badge {
+      margin: 4px 0;
+    }
+  </style>
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <script type="text/javascript">
+    function say () {
+      $.getJSON('/_say', function (data) {
+        $('#wisdom-body').text(data.wisdom_body)
+        $('#wisdom-shortlink').attr('href', data.wisdom_shortlink)
+        $('#wisdom-shortlink').text(data.wisdom_shortlink)
+      })
+    }
+  </script>
+</head>
+<body>
+  <div id="wrap">
+  <div id="app-info">
+    <h1 id="title">MrMsay</h1>
+    <div id="intro">
+      MrM's wisdom,<br>
+      right in your terminal.
+    </div>
+    <div id="say">
+      <button type="button" onclick="say()">Say!</button>
+    </div>
+    <div class="badge">
+      <a target="_blank" href="https://github.com/janeappleseed/MrMsay">
+        <img src="https://img.shields.io/github/stars/janeappleseed/MrMsay.svg?style=social&label=Star&maxAge=3600">
+      </a>
+    </div>
+    <div class="badge">
+      <a target="_blank" href="https://github.com/janeappleseed/MrMsay/releases/latest">
+        <img src="https://img.shields.io/github/release/janeappleseed/MrMsay.svg?maxAge=3600">
+      </a>
+    </div>
+    <div class="badge">
+      <a target="_blank" href="https://github.com/janeappleseed/MrMsay#installation">
+        <img src="https://img.shields.io/badge/homebrew-v{{ version }}-blue.svg?maxAge=3600">
+      </a>
+    </div>
+    <div class="badge">
+      <a target="_blank" href="https://github.com/janeappleseed/MrMsay/blob/master/COPYING">
+        <img src="https://img.shields.io/badge/license-WTFPL-blue.svg?maxAge=3600">
+      </a>
+    </div>
+  </div>
+  <div id="wisdom">
+    <pre id="wisdom-body">{{ wisdom_body }}</pre>
+    <a target="_blank" id="wisdom-shortlink" href="{{ wisdom_shortlink }}"><code>{{ wisdom_shortlink }}</code></a>
+  </div>
+</body>
+</html>

@@ -1,0 +1,6 @@
+arrow >= 0.8.0
+daemonize >= 2.4.7
+flask >= 0.11.1
+peewee >= 2.8.5
+requests >= 2.11.1
+sh >= 1.11
