@@ -40,7 +40,16 @@ def _say():
 
 @app.route('/<_>')
 def catch_all(_):
-    return flask.redirect('/', code=302)
+    # Heroku talks to flask over HTTP, so we need to manually preserve
+    # HTTPS when running on Heroku.
+    if '.herokuapp.com' in flask.request.url_root:
+        scheme = 'https'
+    else:
+        scheme = flask.request.environ['wsgi.url_scheme']
+    return flask.redirect(
+        flask.url_for('index', _scheme=scheme, _external=True),
+        code=302,
+    )
 
 def main():
     logger.logger_init(level=logging.DEBUG)
