@@ -38,6 +38,10 @@ def _say():
         'wisdom_shortlink': comment.short_url,
     })
 
+@app.route('/<_>')
+def catch_all(_):
+    return flask.redirect('/', code=302)
+
 def main():
     logger.logger_init(level=logging.DEBUG)
 
